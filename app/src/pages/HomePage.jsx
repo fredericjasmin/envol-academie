@@ -1,8 +1,12 @@
+import { PageHeader } from "@/components/PageHeader";
+
 export function HomePage() {
     return (
         <section>
-            <h2>Inicio</h2>
-            <p>Bienvenido al sistema de eventos.</p>
+            <PageHeader
+                title="Envol Académie"
+                description="Escuela de vuelo — reserva clases de vuelo con instructores certificados."
+            />
         </section>
     );
 }

@@ -5,10 +5,10 @@ import './App.css'
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-100 flex items-center justify-center">
+    <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
-      <main className="flex-1 max-w-5xl mx-auto p-4">
-      <Outlet />
+      <main className="flex-1 w-full max-w-5xl mx-auto p-4">
+        <Outlet />
       </main>
       <Footer />
     </div>
