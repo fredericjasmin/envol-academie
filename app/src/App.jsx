@@ -5,9 +5,9 @@ import './App.css'
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-background overflow-x-clip">
       <Navbar />
-      <main className="flex-1 w-full max-w-5xl mx-auto p-4">
+      <main className="flex-1 w-full max-w-6xl mx-auto p-4">
         <Outlet />
       </main>
       <Footer />
