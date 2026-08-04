@@ -94,7 +94,7 @@ export function ServicioDetailPage() {
                         </p>
                     )}
 
-                    <div className="grid gap-4 md:grid-cols-3">
+                    <div className="grid gap-4 md:grid-cols-2">
                         <p className="flex items-center gap-2">
                             <DollarSign className="h-4 w-4 text-primary" />
                             ${servicio.precioBase}
@@ -103,11 +103,24 @@ export function ServicioDetailPage() {
                             <Clock className="h-4 w-4 text-primary" />
                             {servicio.duracionMinutos} minutos
                         </p>
-                        <p className="flex items-center gap-2">
-                            <GraduationCap className="h-4 w-4 text-primary" />
-                            {servicio.especialidad?.nombre}
-                        </p>
                     </div>
+                    {servicio.especialidad && (
+                        <Link
+                            to={`/especialidades/${servicio.especialidad.id}`}
+                            className="block rounded-lg border p-4 transition-colors hover:border-primary/50 hover:bg-accent/50"
+                        >
+                            <h3 className="mb-2 flex items-center gap-2 font-semibold">
+                                <GraduationCap className="h-4 w-4 text-primary" />
+                                Especialidad
+                            </h3>
+                            <p className="font-medium">{servicio.especialidad.nombre}</p>
+                            {servicio.especialidad.descripcion && (
+                                <p className="text-sm text-muted-foreground">
+                                    {servicio.especialidad.descripcion}
+                                </p>
+                            )}
+                        </Link>
+                    )}
                 </CardContent>
             </Card>
         </section>

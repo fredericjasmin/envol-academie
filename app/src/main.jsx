@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { HomePage } from './pages/HomePage'
 import { ServiciosPage } from './pages/ServiciosPage'
 import { ServicioDetailPage } from './pages/ServicioDetailPage'
+import { EspecialidadDetailPage } from './pages/EspecialidadDetailPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 
 createRoot(document.getElementById('root')).render(
@@ -16,6 +17,7 @@ createRoot(document.getElementById('root')).render(
           <Route path='/' element={<HomePage />} />
           <Route path='/servicios' element={<ServiciosPage />} />
           <Route path='/servicios/:id' element={<ServicioDetailPage />} />
+          <Route path='/especialidades/:id' element={<EspecialidadDetailPage />} />
           <Route path='*' element={<NotFoundPage />} />
         </Route>
       </Routes>
