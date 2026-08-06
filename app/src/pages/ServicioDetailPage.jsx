@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, Clock, DollarSign, GraduationCap } from "lucide-react";
+import { ArrowLeft, Clock, DollarSign, GraduationCap, Pencil } from "lucide-react";
 import { PageHeader } from "../components/PageHeader";
 import { Button } from "../components/ui/button";
 import {
@@ -66,6 +66,13 @@ export function ServicioDetailPage() {
                 <Link to="/servicios">
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     Volver al listado de cursos
+                </Link>
+            </Button>
+
+            <Button asChild>
+                <Link to={`/servicios/${servicio.id}/editar`}>
+                    <Pencil className="mr-2 h-4 w-4" />
+                    Editar curso
                 </Link>
             </Button>
 
