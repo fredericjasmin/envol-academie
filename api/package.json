@@ -7,6 +7,7 @@
     "server": "nodemon",
     "clean:images": "tsx ./src/config/delete-images.ts",
     "init": "prisma migrate dev --name init && prisma generate && prisma db seed && nodemon",
+    "envol": "npx tsx prisma/seed-envol.ts",
     "reset": "prisma migrate reset --force && npm run clean:images && prisma db seed && nodemon",
     "build": "tsc",
     "start": "node dist/server.js"

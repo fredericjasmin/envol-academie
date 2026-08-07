@@ -10,6 +10,16 @@ export async function getServicios() {
     }
 }
 
+export async function getServiciosActivos() {
+    try {
+        const response = await fetch(`${API_URL}/servicios/activos`);
+        if (!response.ok) throw new Error();
+        return await response.json();
+    } catch {
+        throw new Error("No se pudieron cargar los cursos activos.");
+    }
+}
+
 export async function getServicioById(id) {
     try {
         const response = await fetch(`${API_URL}/servicios/${id}`);

@@ -1,0 +1,34 @@
+# AGENTS.md — Envol Académie
+
+## Contexto del proyecto
+Proyecto de curso: Frontend React (Tailwind + shadcn/ui) en `app/`, que consume
+el API en `api/` (ya hecho, no se modifica). Enunciado y plan del proyecto en
+`docs/enunciado-proyecto-gestion-citas.md` y `docs/envol-academie-plan.md`.
+Léelos antes de trabajar si no los tienes en contexto.
+
+## Referencia de arquitectura
+`reference/` es la app que la profesora armó en clase con OTRA
+temática (eventos/organizadores). NO es este proyecto, NO se copia contenido
+ni tema — solo se sigue su ESTRUCTURA/PATRÓN (nombres de carpetas, cómo arma
+services/, cómo arma páginas de detalle, manejo de 404, etc.) cuando ese
+patrón ya se vio en clase.
+
+## Reglas de trabajo
+1. Solo usa patrones de `reference/` que YA se hayan visto en clase.
+   Si no sabes si algo se vio, pregúntame primero.
+2. No implementes nada fuera de lo que pido en el momento (no te adelantes a
+   módulos futuros como login, formularios, etc.).
+3. NUNCA escribas el código completo por mí. Dame:
+   - el archivo/patrón de referencia a mirar (ruta exacta en reference/)
+   - qué debo crear (nombre de archivo, ruta dentro de app/)
+   - la forma/estructura esperada (props, endpoints, qué debe mostrar)
+   - y déjame escribirlo yo.
+4. Cuando te diga que ya lo hice, revisa mi código y dime qué corregir (no lo
+   reescribas completo, dame el diff conceptual).
+
+
+
+
+
+
+Ok revisa mi proyecto para ver que falta segun el enunciado de proyecto y asi tomar de idea o estructura la referencia, recuerda ver de que trata mi pagina web

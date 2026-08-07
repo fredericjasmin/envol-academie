@@ -15,5 +15,16 @@ export const servicioSchema = z.object({
         .max(480, "La duración no puede superar 480 minutos."),
     especialidadId: z.coerce.number()
         .int("Debe seleccionar una especialidad.")
-        .min(1, "Debe seleccionar una especialidad.")
+        .min(1, "Debe seleccionar una especialidad."),
+    imagen: z.union([
+        z.literal(""),
+        z.string()
+            .trim()
+            .min(1, "Ingrese el nombre del archivo de imagen.")
+            .max(255, "El nombre de la imagen no puede superar 255 caracteres.")
+            .regex(
+                /^[a-zA-Z0-9._-]+\.(jpg|jpeg|png|webp)$/i,
+                "El archivo debe ser JPG, PNG o WEBP."
+            ),
+    ]).optional(),
 })

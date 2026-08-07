@@ -1,37 +1,35 @@
 import { Link } from "react-router-dom"
-import { ShieldX } from "lucide-react"
+import { ShieldAlert, ShieldX } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle
-} from "@/components/ui/card"
 
 export function UnauthorizedPage() {
     return (
-        <section className="mx-auto max-w-md px-4 py-16 flex items-center justify-center min-h-[50vh]">
-            <Card className="w-full text-center shadow-lg p-4">
-                <CardHeader className="space-y-4">
-                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-destructive/10">
-                        <ShieldX className="h-8 w-8 text-destructive" />
-                    </div>
-                    <CardTitle className="text-2xl font-bold tracking-tight">
+        <section className="relative overflow-hidden rounded-3xl border border-border shadow-sm">
+            <div className="navy-band relative px-6 py-20 text-center text-white">
+                <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.07]">
+                    <ShieldX className="size-64" />
+                </div>
+                <div className="relative">
+                    <span className="mx-auto flex size-16 items-center justify-center rounded-full bg-white/10">
+                        <ShieldAlert className="size-8" />
+                    </span>
+                    <p className="mt-5 boarding-label text-white/55">Acceso restringido</p>
+                    <h1 className="mt-2 text-3xl font-bold tracking-tight">
                         Acceso no autorizado
-                    </CardTitle>
-                    <CardDescription className="text-base max-w-xs mx-auto">
-                        Su usuario no tiene permisos para ingresar a esta sección.
-                    </CardDescription>
-                </CardHeader>
-                <CardContent className="pt-2">
-                    <Button asChild className="w-full sm:w-auto px-8">
+                    </h1>
+                    <p className="mx-auto mt-3 max-w-md text-white/70">
+                        Su usuario no tiene permisos para ingresar a esta sección del hangar.
+                    </p>
+                    <Button
+                        asChild
+                        className="mt-8 border-transparent bg-white text-foreground hover:bg-white/85"
+                    >
                         <Link to="/">
-                            Regresar al inicio
+                            Volver al inicio
                         </Link>
                     </Button>
-                </CardContent>
-            </Card>
+                </div>
+            </div>
         </section>
     )
 }

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+﻿import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
@@ -16,13 +16,7 @@ import { registerSchema } from "@/schemas/registerSchema"
 import { useAuth } from "@/auth/useAuth"
 
 import { Button } from "@/components/ui/button"
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle
-} from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
@@ -58,7 +52,7 @@ export function RegisterPage() {
                 telefono: data.telefono?.trim() || null,
                 password: data.password
             })
-            toast.success("Usuario registrado correctamente. Ahora puede iniciar sesión.")
+            toast.success("Usuario registrado correctamente. Ahora puede iniciar sesiÃ³n.")
             reset()
             navigate("/login", { replace: true })
         } catch (error) {
@@ -69,15 +63,16 @@ export function RegisterPage() {
     if (isAuthenticated) {
         return (
             <section className="mx-auto max-w-md py-12 px-4">
-                <Card className="border-muted/60 shadow-xl">
-                    <CardHeader>
-                        <CardTitle className="text-xl">Sesión activa</CardTitle>
-                        <CardDescription>
-                            Debe cerrar la sesión actual antes de registrar otra cuenta.
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <Button type="button" className="w-full shadow-sm" onClick={() => navigate("/servicios")}>
+                <Card className="overflow-hidden rounded-2xl border-border shadow-sm gap-0">
+                    <div className="navy-band px-6 py-6 text-white">
+                        <p className="boarding-label text-white/55">SesiÃ³n activa</p>
+                        <h2 className="mt-1.5 text-2xl font-bold tracking-tight">SesiÃ³n activa</h2>
+                        <p className="mt-1 text-sm text-white/70">
+                            Debe cerrar la sesiÃ³n actual antes de registrar otra cuenta.
+                        </p>
+                    </div>
+                    <CardContent className="p-6">
+                        <Button type="button" className="w-full" onClick={() => navigate("/servicios")}>
                             Ir a cursos
                         </Button>
                     </CardContent>
@@ -88,20 +83,29 @@ export function RegisterPage() {
 
     return (
         <section className="mx-auto max-w-md py-12 px-4">
-            <Card className="border-muted/60 shadow-xl">
-                <CardHeader className="space-y-2 text-center">
-                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 ring-8 ring-primary/5">
-                        <UserPlus className="h-6 w-6 text-primary" />
+            <Card className="overflow-hidden rounded-2xl border-border shadow-sm gap-0">
+                <div className="navy-band relative px-6 pb-7 pt-6 text-white">
+                    <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-x-6 bottom-0 h-px runway-stripes text-white/25"
+                    />
+                    <div className="flex items-center gap-3">
+                        <span className="flex size-11 items-center justify-center rounded-full bg-white/10">
+                            <UserPlus className="size-5" />
+                        </span>
+                        <div>
+                            <p className="boarding-label text-white/55">Envol AcadÃ©mie</p>
+                            <h2 className="text-2xl font-bold tracking-tight">Crear cuenta</h2>
+                        </div>
                     </div>
-                    <CardTitle className="text-2xl font-bold tracking-tight">Crear cuenta</CardTitle>
-                    <CardDescription>
-                        Registre sus datos para acceder a Envol Académie.
-                    </CardDescription>
-                </CardHeader>
-                <CardContent>
+                    <p className="mt-3 text-sm text-white/70">
+                        Registre sus datos para comenzar a volar con nosotros.
+                    </p>
+                </div>
+                <CardContent className="p-6">
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
                         <div className="space-y-1.5">
-                            <Label htmlFor="nombre" className={errors.nombre ? "text-destructive" : ""}>
+                            <Label htmlFor="nombre" className={`boarding-label ${errors.nombre ? "text-destructive" : "text-muted-foreground"}`}>
                                 Nombre
                             </Label>
                             <div className="relative">
@@ -109,7 +113,7 @@ export function RegisterPage() {
                                 <Input
                                     id="nombre"
                                     type="text"
-                                    placeholder="María"
+                                    placeholder="MarÃ­a"
                                     autoComplete="given-name"
                                     disabled={isSubmitting}
                                     className={`pl-9 bg-background/50 focus-visible:ring-1 ${errors.nombre ? "border-destructive focus-visible:ring-destructive" : ""}`}
@@ -122,7 +126,7 @@ export function RegisterPage() {
                         </div>
 
                         <div className="space-y-1.5">
-                            <Label htmlFor="primerApellido" className={errors.primerApellido ? "text-destructive" : ""}>
+                            <Label htmlFor="primerApellido" className={`boarding-label ${errors.primerApellido ? "text-destructive" : "text-muted-foreground"}`}>
                                 Primer apellido
                             </Label>
                             <div className="relative">
@@ -130,7 +134,7 @@ export function RegisterPage() {
                                 <Input
                                     id="primerApellido"
                                     type="text"
-                                    placeholder="López"
+                                    placeholder="LÃ³pez"
                                     autoComplete="family-name"
                                     disabled={isSubmitting}
                                     className={`pl-9 bg-background/50 focus-visible:ring-1 ${errors.primerApellido ? "border-destructive focus-visible:ring-destructive" : ""}`}
@@ -143,7 +147,7 @@ export function RegisterPage() {
                         </div>
 
                         <div className="space-y-1.5">
-                            <Label htmlFor="segundoApellido" className={errors.segundoApellido ? "text-destructive" : ""}>
+                            <Label htmlFor="segundoApellido" className={`boarding-label ${errors.segundoApellido ? "text-destructive" : "text-muted-foreground"}`}>
                                 Segundo apellido (opcional)
                             </Label>
                             <div className="relative">
@@ -164,8 +168,8 @@ export function RegisterPage() {
                         </div>
 
                         <div className="space-y-1.5">
-                            <Label htmlFor="correo" className={errors.correo ? "text-destructive" : ""}>
-                                Correo electrónico
+                            <Label htmlFor="correo" className={`boarding-label ${errors.correo ? "text-destructive" : "text-muted-foreground"}`}>
+                                Correo electrÃ³nico
                             </Label>
                             <div className="relative">
                                 <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground/70" />
@@ -185,8 +189,8 @@ export function RegisterPage() {
                         </div>
 
                         <div className="space-y-1.5">
-                            <Label htmlFor="telefono" className={errors.telefono ? "text-destructive" : ""}>
-                                Teléfono (opcional)
+                            <Label htmlFor="telefono" className={`boarding-label ${errors.telefono ? "text-destructive" : "text-muted-foreground"}`}>
+                                TelÃ©fono (opcional)
                             </Label>
                             <div className="relative">
                                 <Phone className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground/70" />
@@ -206,15 +210,15 @@ export function RegisterPage() {
                         </div>
 
                         <div className="space-y-1.5">
-                            <Label htmlFor="password" className={errors.password ? "text-destructive" : ""}>
-                                Contraseña
+                            <Label htmlFor="password" className={`boarding-label ${errors.password ? "text-destructive" : "text-muted-foreground"}`}>
+                                ContraseÃ±a
                             </Label>
                             <div className="relative">
                                 <LockKeyhole className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground/70" />
                                 <Input
                                     id="password"
                                     type="password"
-                                    placeholder="Mínimo 8 caracteres"
+                                    placeholder="MÃ­nimo 8 caracteres"
                                     autoComplete="new-password"
                                     disabled={isSubmitting}
                                     className={`pl-9 bg-background/50 focus-visible:ring-1 ${errors.password ? "border-destructive focus-visible:ring-destructive" : ""}`}
@@ -227,15 +231,15 @@ export function RegisterPage() {
                         </div>
 
                         <div className="space-y-1.5">
-                            <Label htmlFor="confirmPassword" className={errors.confirmPassword ? "text-destructive" : ""}>
-                                Confirmar contraseña
+                            <Label htmlFor="confirmPassword" className={`boarding-label ${errors.confirmPassword ? "text-destructive" : "text-muted-foreground"}`}>
+                                Confirmar contraseÃ±a
                             </Label>
                             <div className="relative">
                                 <LockKeyhole className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground/70" />
                                 <Input
                                     id="confirmPassword"
                                     type="password"
-                                    placeholder="Repita la contraseña"
+                                    placeholder="Repita la contraseÃ±a"
                                     autoComplete="new-password"
                                     disabled={isSubmitting}
                                     className={`pl-9 bg-background/50 focus-visible:ring-1 ${errors.confirmPassword ? "border-destructive focus-visible:ring-destructive" : ""}`}
@@ -261,9 +265,9 @@ export function RegisterPage() {
                             )}
                         </Button>
                         <p className="text-center text-sm text-muted-foreground">
-                            ¿Ya tiene una cuenta?{" "}
+                            Â¿Ya tiene una cuenta?{" "}
                             <Link to="/login" className="font-semibold text-primary transition-colors hover:underline">
-                                Iniciar sesión
+                                Iniciar sesiÃ³n
                             </Link>
                         </p>
                     </form>

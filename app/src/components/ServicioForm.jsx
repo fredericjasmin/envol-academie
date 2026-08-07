@@ -1,6 +1,6 @@
-import PropTypes from "prop-types"
+﻿import PropTypes from "prop-types"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Clock, DollarSign, Hash, Text, Type } from "lucide-react"
+import { Clock, DollarSign, Hash, Image as ImageIcon, Text, Type } from "lucide-react"
 
 import { servicioSchema } from "../schemas/servicioSchema"
 import { FormError } from "./FormError"
@@ -10,13 +10,9 @@ import { Input } from "./ui/input"
 import { Textarea } from "./ui/textarea"
 import {
     Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle
+    CardContent
 } from "./ui/card"
-import { Controller, useForm } from "react-hook-form"
+import { Controller, useForm, useWatch } from "react-hook-form"
 import {
     Select,
     SelectContent,
@@ -46,33 +42,48 @@ export function ServicioForm({
             duracionMinutos: initialData?.duracionMinutos || "",
             especialidadId: initialData?.especialidadId
                 ? String(initialData.especialidadId)
-                : ""
+                : "",
+            imagen: initialData?.imagen || ""
         }
     })
 
+    const IMAGE_URL = import.meta.env.VITE_IMAGE_URL
+    const FALLBACK_IMAGE = `${IMAGE_URL}/image-not-found.jpg`
+    const imagenActual = useWatch({ control, name: "imagen" }) || ""
+
     function handleValidSubmit(formData) {
-        onSubmit(formData)
+        onSubmit({
+            ...formData,
+            imagen: formData.imagen?.trim() ? formData.imagen.trim() : null
+        })
     }
 
     return (
-        <Card className="mx-auto max-w-4xl border-border/70 shadow-sm">
-            <CardHeader className="space-y-1">
-                <CardTitle className="text-2xl">Datos del curso</CardTitle>
-                <CardDescription>
-                    Complete la información principal del curso y guarde los datos en la API.
-                </CardDescription>
-            </CardHeader>
+        <Card className="mx-auto max-w-3xl overflow-hidden rounded-2xl border-border shadow-sm gap-0">
+            <div className="navy-band relative px-6 py-6 text-white">
+                <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-x-6 bottom-0 h-px runway-stripes text-white/25"
+                />
+                <p className="boarding-label text-white/55">
+                    {initialData ? "EdiciÃ³n de curso" : "Nuevo curso"}
+                </p>
+                <h2 className="mt-1.5 text-2xl font-bold tracking-tight">Datos del curso</h2>
+                <p className="mt-1 text-sm text-white/70">
+                    Complete la informaciÃ³n principal del curso y guarde los datos en la API.
+                </p>
+            </div>
             <form onSubmit={handleSubmit(handleValidSubmit)}>
-                <CardContent className="grid gap-6">
+                <CardContent className="grid gap-6 p-6">
                     <div className="grid gap-5 md:grid-cols-2">
                         <div className="md:col-span-2">
-                            <label htmlFor="nombre" className="mb-2 flex items-center gap-2 text-sm font-medium">
+                            <label htmlFor="nombre" className="boarding-label mb-2 flex items-center gap-2 text-muted-foreground">
                                 <Type className="h-4 w-4 text-primary" />
                                 Nombre del curso
                             </label>
                             <Input
                                 id="nombre"
-                                placeholder="Ej: Vuelo de familiarización"
+                                placeholder="Ej: Vuelo de familiarizaciÃ³n"
                                 className={errors.nombre ? "border-destructive" : ""}
                                 {...register("nombre")}
                             />
@@ -80,9 +91,9 @@ export function ServicioForm({
                             <FormError message={errors.nombre?.message} />
                         </div>
                         <div className="md:col-span-2">
-                            <label htmlFor="descripcion" className="mb-2 flex items-center gap-2 text-sm font-medium">
+                            <label htmlFor="descripcion" className="boarding-label mb-2 flex items-center gap-2 text-muted-foreground">
                                 <Text className="h-4 w-4 text-primary" />
-                                Descripción
+                                DescripciÃ³n
                             </label>
                             <Textarea
                                 id="descripcion"
@@ -96,7 +107,7 @@ export function ServicioForm({
                         </div>
 
                         <div>
-                            <label htmlFor="especialidadId" className="mb-2 flex items-center gap-2 text-sm font-medium">
+                            <label htmlFor="especialidadId" className="boarding-label mb-2 flex items-center gap-2 text-muted-foreground">
                                 <Hash className="h-4 w-4 text-primary" />
                                 Especialidad
                             </label>
@@ -123,7 +134,7 @@ export function ServicioForm({
                         </div>
 
                         <div>
-                            <label htmlFor="precioBase" className="mb-2 flex items-center gap-2 text-sm font-medium">
+                            <label htmlFor="precioBase" className="boarding-label mb-2 flex items-center gap-2 text-muted-foreground">
                                 <DollarSign className="h-4 w-4 text-primary" />
                                 Precio base
                             </label>
@@ -140,9 +151,9 @@ export function ServicioForm({
                         </div>
 
                         <div>
-                            <label htmlFor="duracionMinutos" className="mb-2 flex items-center gap-2 text-sm font-medium">
+                            <label htmlFor="duracionMinutos" className="boarding-label mb-2 flex items-center gap-2 text-muted-foreground">
                                 <Clock className="h-4 w-4 text-primary" />
-                                Duración (minutos)
+                                DuraciÃ³n (minutos)
                             </label>
                             <Input
                                 id="duracionMinutos"
@@ -156,9 +167,51 @@ export function ServicioForm({
                             <FormError message={errors.duracionMinutos?.message} />
                         </div>
                     </div>
+
+                    <div className="grid gap-5 md:grid-cols-2">
+                        <div>
+                            <label htmlFor="imagen" className="boarding-label mb-2 flex items-center gap-2 text-muted-foreground">
+                                <ImageIcon className="h-4 w-4 text-primary" />
+                                Imagen representativa
+                            </label>
+                            <Input
+                                id="imagen"
+                                placeholder="Ej: servicio-1783628774262.png"
+                                className={errors.imagen ? "border-destructive" : ""}
+                                {...register("imagen")}
+                            />
+                            <p className="mt-1 text-xs text-muted-foreground">
+                                Ingrese el nombre del archivo de imagen (JPG, PNG o WEBP) disponible en la
+                                carpeta de imÃ¡genes del API.
+                            </p>
+                            <FormError message={errors.imagen?.message} />
+                        </div>
+
+                        <div>
+                            <label className="boarding-label mb-2 flex items-center gap-2 text-muted-foreground">
+                                <ImageIcon className="h-4 w-4 text-primary" />
+                                Vista previa
+                            </label>
+                            <div className="flex h-36 w-full items-center justify-center overflow-hidden rounded-lg border bg-muted">
+                                <img
+                                    src={imagenActual ? `${IMAGE_URL}/${imagenActual}` : FALLBACK_IMAGE}
+                                    alt="Vista previa del curso"
+                                    className="h-full w-full object-cover"
+                                    onError={(event) => {
+                                        event.currentTarget.src = FALLBACK_IMAGE
+                                    }}
+                                />
+                            </div>
+                            {imagenActual && (
+                                <p className="mt-1 text-xs text-muted-foreground">
+                                    {`${IMAGE_URL}/${imagenActual}`}
+                                </p>
+                            )}
+                        </div>
+                    </div>
                 </CardContent>
 
-                <CardFooter className="flex flex-col-reverse gap-3 border-t pt-6 sm:flex-row sm:justify-end">
+                <div className="dash-sep flex flex-col-reverse gap-3 px-6 py-4 sm:flex-row sm:justify-end">
                     <Button
                         type="button"
                         variant="outline"
@@ -169,7 +222,7 @@ export function ServicioForm({
                     <Button type="submit" disabled={isSubmitting}>
                         {submitText}
                     </Button>
-                </CardFooter>
+                </div>
             </form>
         </Card>
     )

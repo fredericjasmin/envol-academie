@@ -1,17 +1,11 @@
-import { useState } from "react"
+﻿import { useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { LogIn, Mail, LockKeyhole } from "lucide-react"
+import { LogIn, Mail, LockKeyhole, Plane } from "lucide-react"
 import toast from "react-hot-toast"
 
 import { useAuth } from "@/auth/useAuth"
 import { Button } from "@/components/ui/button"
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle
-} from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
@@ -61,14 +55,15 @@ export function LoginPage() {
     if (isAuthenticated) {
         return (
             <section className="mx-auto max-w-md">
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Sesión activa</CardTitle>
-                        <CardDescription>
-                            Ya existe un usuario autenticado en la aplicación.
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent>
+                <Card className="overflow-hidden rounded-2xl border-border shadow-sm gap-0">
+                    <div className="navy-band px-6 py-6 text-white">
+                        <p className="boarding-label text-white/55">SesiÃ³n activa</p>
+                        <h2 className="mt-1.5 text-2xl font-bold tracking-tight">SesiÃ³n activa</h2>
+                        <p className="mt-1 text-sm text-white/70">
+                            Ya existe un usuario autenticado en la aplicaciÃ³n.
+                        </p>
+                    </div>
+                    <CardContent className="p-6">
                         <Button
                             type="button"
                             className="w-full"
@@ -84,29 +79,36 @@ export function LoginPage() {
 
     return (
         <section className="mx-auto max-w-md py-8">
-            <Card className="shadow-lg">
-                <CardHeader className="space-y-2 text-center">
-                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                        <LogIn className="h-6 w-6 text-primary" />
+            <Card className="overflow-hidden rounded-2xl border-border shadow-sm gap-0">
+                <div className="navy-band relative px-6 pb-7 pt-6 text-white">
+                    <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-x-6 bottom-0 h-px runway-stripes text-white/25"
+                    />
+                    <div className="flex items-center gap-3">
+                        <span className="flex size-11 items-center justify-center rounded-full bg-white/10">
+                            <Plane className="size-5" />
+                        </span>
+                        <div>
+                            <p className="boarding-label text-white/55">Envol AcadÃ©mie</p>
+                            <h2 className="text-2xl font-bold tracking-tight">
+                                Iniciar sesiÃ³n
+                            </h2>
+                        </div>
                     </div>
-                    <CardTitle className="text-2xl">
-                        Iniciar sesión
-                    </CardTitle>
-                    <CardDescription>
-                        Ingrese sus credenciales para acceder a Envol Académie.
-                    </CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <form
-                        onSubmit={handleSubmit}
-                        className="space-y-5"
-                    >
-                        <div className="space-y-2">
-                            <Label htmlFor="correo">
-                                Correo electrónico
+                    <p className="mt-3 text-sm text-white/70">
+                        Ingrese sus credenciales para acceder a su cuenta de vuelo.
+                    </p>
+                </div>
+
+                <CardContent className="p-6">
+                    <form onSubmit={handleSubmit} className="space-y-5">
+                        <div className="space-y-1.5">
+                            <Label htmlFor="correo" className="boarding-label text-muted-foreground">
+                                Correo electrÃ³nico
                             </Label>
                             <div className="relative">
-                                <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                                <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                                 <Input
                                     id="correo"
                                     name="correo"
@@ -121,19 +123,19 @@ export function LoginPage() {
                                 />
                             </div>
                         </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="password">
-                                Contraseña
+                        <div className="space-y-1.5">
+                            <Label htmlFor="password" className="boarding-label text-muted-foreground">
+                                ContraseÃ±a
                             </Label>
                             <div className="relative">
-                                <LockKeyhole className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                                <LockKeyhole className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                                 <Input
                                     id="password"
                                     name="password"
                                     type="password"
                                     value={formData.password}
                                     onChange={handleChange}
-                                    placeholder="Ingrese su contraseña"
+                                    placeholder="Ingrese su contraseÃ±a"
                                     autoComplete="current-password"
                                     className="pl-9"
                                     disabled={loading}
@@ -147,12 +149,10 @@ export function LoginPage() {
                             disabled={loading}
                         >
                             <LogIn className="mr-2 h-4 w-4" />
-                            {loading
-                                ? "Iniciando sesión..."
-                                : "Iniciar sesión"}
+                            {loading ? "Iniciando sesiÃ³n..." : "Iniciar sesiÃ³n"}
                         </Button>
                         <p className="text-center text-sm text-muted-foreground">
-                            ¿No tiene una cuenta?{" "}
+                            Â¿No tiene una cuenta?{" "}
                             <Link
                                 to="/register"
                                 className="font-medium text-primary hover:underline"

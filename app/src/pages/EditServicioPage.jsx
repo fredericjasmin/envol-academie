@@ -50,11 +50,7 @@ export function EditServicioPage() {
 
     async function handleUpdateServicio(formData) {
         try {
-            const servicioData = {
-                ...formData,
-                imagen: servicio.imagen
-            }
-            const servicioActualizado = await actualizarServicio(id, servicioData)
+            const servicioActualizado = await actualizarServicio(id, formData)
             toast.success(`El curso "${servicioActualizado.data.nombre}" fue actualizado correctamente.`)
             navigate("/servicios")
         } catch (error) {
