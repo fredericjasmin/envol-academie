@@ -78,7 +78,7 @@ export function Navbar() {
                     className="flex shrink-0 items-center gap-2"
                     onClick={closeMenus}
                 >
-                    <img src={logo} alt="Envol Académie" className="h-10 w-auto" />
+                    <img src={logo} alt="Envol Académie" className="h-12 w-auto" />
                 </NavLink>
 
                 <div className="flex items-center justify-center gap-1 overflow-x-auto text-sm">
